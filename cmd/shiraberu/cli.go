@@ -31,7 +31,7 @@ func main() {
 	startFromPage := flag.Int("page", 0, "starting page number")
 	timeout := flag.Duration("t", 0, "request timeout (e.g., 30s)")
 	format := flag.String("f", "plaintext", "output format (e.g., plaintext/json)")
-	omitFields := flag.String("omit", "", "fields to omit (title,desc,url). only with plaintext format")
+	emitFields := flag.String("emit", "url", "fields to emit (title,desc,url). only works with plaintext format")
 	entriesSep := flag.String("separator", "\n", "result entry separator")
 	fieldsSep := flag.String("field-separator", "|", "entry fields separator")
 	enableCache := flag.Bool("C", true, "enable caching")
@@ -126,6 +126,6 @@ func main() {
 		fmt.Print(string(json))
 		os.Exit(0)
 	default:
-		fmt.Print(formatResults(results.Results, *omitFields, *fieldsSep, *entriesSep))
+		fmt.Print(formatResults(results.Results, *emitFields, *fieldsSep, *entriesSep))
 	}
 }

@@ -6,7 +6,7 @@ import (
 	"github.com/jim-ww/shiraberu/providers"
 )
 
-func formatResults(results []providers.SearchResult, omitFields, fieldsSep, entriesSep string) string {
+func formatResults(results []providers.SearchResult, emitFields, fieldsSep, entriesSep string) string {
 	if len(results) == 0 {
 		return ""
 	}
@@ -16,15 +16,15 @@ func formatResults(results []providers.SearchResult, omitFields, fieldsSep, entr
 	for i, result := range results {
 		var parts []string
 
-		if !strings.Contains(omitFields, "title") && result.Title != "" {
+		if strings.Contains(emitFields, "title") && result.Title != "" {
 			parts = append(parts, result.Title)
 		}
 
-		if !strings.Contains(omitFields, "desc") && result.Description != "" {
+		if strings.Contains(emitFields, "desc") && result.Description != "" {
 			parts = append(parts, result.Description)
 		}
 
-		if !strings.Contains(omitFields, "url") && result.URL != "" {
+		if strings.Contains(emitFields, "url") && result.URL != "" {
 			parts = append(parts, result.URL)
 		}
 
