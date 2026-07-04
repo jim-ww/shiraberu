@@ -22,7 +22,7 @@ Use it as a CLI tool or import it as a Go library.
 ## Quick Start
 
 ```bash
-go install github.com/jim-ww/shiraberu/cmd/shiraberu
+go install github.com/jim-ww/shiraberu/cmd/shiraberu@latest
 shiraberu golang concurrency
 ```
 
