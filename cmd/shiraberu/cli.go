@@ -39,12 +39,8 @@ func main() {
 	cacheTTL := flag.Duration("ttl", 15*time.Minute, "cache entry TTL (e.g., 15m)")
 	cacheMaxEntries := flag.Int("max-cache", 1000, "maximum cache entries")
 	debug := flag.Bool("v", false, "verbose output")
+	fetchURL := flag.String("url", "", "fetch this URL and print its content as GitHub-flavored markdown, skipping search")
 	flag.Parse()
-
-	if len(flag.Args()) == 0 {
-		log.Fatal("query cannot be empty")
-	}
-	query := strings.Join(flag.Args(), " ")
 
 	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt)
 	defer cancel()
@@ -53,6 +49,20 @@ func main() {
 		ctx, stop = context.WithDeadline(ctx, time.Now().Add(*timeout))
 		defer stop()
 	}
+
+	if *fetchURL != "" {
+		markdown, err := shiraberu.FetchURLAsMarkdown(ctx, providers.NewHTTPClient(), *fetchURL)
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Print(markdown)
+		os.Exit(0)
+	}
+
+	if len(flag.Args()) == 0 {
+		log.Fatal("query cannot be empty")
+	}
+	query := strings.Join(flag.Args(), " ")
 
 	opts := []shiraberu.Option{}
 

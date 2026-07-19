@@ -54,6 +54,7 @@ Flags:
   -separator string        result separator (default "\n")
   -field-separator string  field separator within a result (default "|")
   -emit string       fields to show: title, desc, url (plaintext only) (default "url")
+  -url string        fetch this URL and print its content as GitHub-flavored markdown, skipping search
   -v                 verbose output
 ```
 
@@ -69,6 +70,12 @@ Throttle to 1 req/sec, show only title and URL:
 
 ```bash
 shiraberu -p ddg -r 1s -emit title,url -field-separator " -> " "learn go"
+```
+
+Fetch a page and print it as GitHub-flavored markdown:
+
+```bash
+shiraberu -url https://go.dev/
 ```
 
 ### Output Format
