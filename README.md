@@ -215,6 +215,29 @@ func main() {
 }
 ```
 
+### Fetching a URL as markdown
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/jim-ww/shiraberu"
+    "github.com/jim-ww/shiraberu/providers"
+)
+
+func main() {
+    markdown, err := shiraberu.FetchURLAsMarkdown(context.Background(), providers.NewHTTPClient(), "https://go.dev/")
+    if err != nil {
+        panic(err)
+    }
+
+    fmt.Println(markdown)
+}
+```
+
 Each provider may expose its own configuration options — see the [`providers`](./providers) package for details.
 
 ---
