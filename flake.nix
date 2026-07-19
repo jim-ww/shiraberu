@@ -18,7 +18,7 @@
           pname = "shiraberu";
           version = "1.0";
           src = pkgs.lib.cleanSource ./.;
-          vendorHash = "sha256-D3sraCsi7VF//q7K4ZWw9JEEbQ3Cs94SYkTf9nQ4NW8=";
+          vendorHash = "sha256-ZbfzjgK/6GqArUuKLtCgLgEv1Rp0/FSRylzOPcYjhf8=";
         };
       };
     };
